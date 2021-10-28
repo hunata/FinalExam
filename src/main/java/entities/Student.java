@@ -68,24 +68,62 @@ public class Student {
         return sb.toString();
     }
 
-    public void addStudentToArrayList(String[] str){
-        for (int i =0; i<str.length; i++){
-            if(i==0){
+    public void addStudentToArrayList(String[] str) {
+        for (int i = 0; i < str.length; i++) {
+            if (i == 0) {
                 this.id = Integer.parseInt(str[i]);
-            } else if (i==1){
+            } else if (i == 1) {
                 this.name = str[i];
-            } else if (i ==2){
+            } else if (i == 2) {
                 this.email = str[i];
-            }else if (i ==3){
+            } else if (i == 3) {
                 this.bonus = Integer.parseInt(str[i]);
-            }else if (i ==4){
+            } else if (i == 4) {
                 this.report = Integer.parseInt(str[i]);
-            }else if (i ==5){
+            } else if (i == 5) {
                 this.app = Integer.parseInt(str[i]);
-            }else if (i ==6){
+            } else if (i == 6) {
                 this.lt = Integer.parseInt(str[i]);
             }
         }
+    }
+
+    public static ArrayList<Student> sortScoreDes(ArrayList<Student> listStudent) {
+        Collections.sort(listStudent, new Comparator<Student>() {
+
+            @Override
+            public int compare(Student st1, Student st2) {
+                if (st1.getLt() < st2.getLt()) {
+                    return 1;
+                } else {
+                    if (st1.getLt() == st2.getLt()) {
+                        return 0;
+                    } else {
+                        return -1;
+                    }
+                }
+            }
+        });
+        return listStudent;
+    }
+
+    public static ArrayList<Student> sortFinalScoreInc(ArrayList<Student> listStudent) {
+        Collections.sort(listStudent, new Comparator<Student>() {
+
+            @Override
+            public int compare(Student st1, Student st2) {
+                if (st1.getFinalScore() < st2.getFinalScore()) {
+                    return -1;
+                } else {
+                    if (st1.getFinalScore() == st2.getFinalScore()) {
+                        return 0;
+                    } else {
+                        return 1;
+                    }
+                }
+            }
+        });
+        return listStudent;
     }
 
 }
