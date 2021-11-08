@@ -1,5 +1,6 @@
 package entities;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,6 +10,9 @@ public class Student {
     private String name;
     private String email;
     private double bonus, report, app, lt, finalScore;
+    private static final String PTGMAIL = "^[\\w]+@gmail.com";
+    private static final String PTOUTLOOK = "^[\\w]+@outlook.com";
+
 
     public Student(int id, String name, String email, double bonus, double report, double app, double LT) {
         this.id = id;
@@ -18,6 +22,7 @@ public class Student {
         this.report = report;
         this.app = app;
         this.lt = lt;
+        this.finalScore = (this.bonus * 10) / 100 + (this.report * 30) / 100 + (this.app * 15) / 100 + (this.lt * 45) / 100;
     }
 
     public int getId() {
@@ -25,7 +30,9 @@ public class Student {
     }
 
     public double getFinalScore() {
-        return finalScore;
+
+
+        return (this.bonus * 10) / 100 + (this.report * 30) / 100 + (this.app * 15) / 100 + (this.lt * 45) / 100;
     }
 
     public double getBonus() {
@@ -44,14 +51,22 @@ public class Student {
         return lt;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public Student() {
     }
 
 
-    public double finalPoint() {
-        double finalPoint = (this.bonus * 10) / 100 + (this.report * 30) / 100 + (this.app * 15) / 100 + (this.lt * 45) / 100;
-        return finalPoint;
-    }
+//    public double finalPoint() {
+//        double finalPoint = (this.bonus * 10) / 100 + (this.report * 30) / 100 + (this.app * 15) / 100 + (this.lt * 45) / 100;
+//        return finalPoint;
+//    }
 
     @Override
     public String toString() {
@@ -63,7 +78,7 @@ public class Student {
         sb.append(", report=").append(report);
         sb.append(", app=").append(app);
         sb.append(", lt=").append(lt);
-        sb.append(", finalScore=").append(finalPoint());
+        sb.append(", finalScore=").append(getFinalScore());
         sb.append('}');
         return sb.toString();
     }
@@ -126,4 +141,34 @@ public class Student {
         return listStudent;
     }
 
+    public boolean isGmail() {
+        return this.email.matches(PTGMAIL);
+    }
+
+    public boolean isOutlook() {
+        return this.email.matches(PTOUTLOOK);
+    }
+
+    public static ArrayList<Student> printListStudentGmail(ArrayList<Student> st) {
+        ArrayList<Student> st1 = new ArrayList<>();
+        for (Student tmpST : st) {
+            if (tmpST.isGmail()) {
+                st1.add(tmpST);
+            }
+        }
+        for(Student rs : st1){
+            System.out.println(rs);
+        } return st1;
+    }
+    public static ArrayList<Student> printListStudentOutlook(ArrayList<Student> st) {
+        ArrayList<Student> st1 = new ArrayList<>();
+        for (Student tmpST : st) {
+            if (tmpST.isGmail()) {
+                st1.add(tmpST);
+            }
+        }
+        for(Student rs : st1){
+            System.out.println(rs);
+        }return st1;
+    }
 }
